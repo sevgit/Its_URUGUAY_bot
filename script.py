@@ -3,6 +3,7 @@ import random
 import time
 import datetime
 import traceback #para logear los errores
+import botlogin #informacion personal para log in del bot
 import unicodedata
 
 def update_log(id, log_path): #para los comentarios que ya respondi
@@ -49,11 +50,10 @@ if __name__ == "__main__":
 			
 			output_log("Comenzando el script")
 			log = load_log(comment_log_path)
-			reddit = praw.Reddit(	client_id = "client_id",
-									client_secret = "client_secret",
-									password = "bot-password",
-									user_agent = "desription",
-									username = "bot-username")
+			reddit = praw.Reddit(	client_secret = botlogin.client_secret,
+									password = botlogin.password,
+									user_agent = "Its_URUGUAY_bot script by Sevg/Dirkgentle/ElectrWeakHyprCharge",
+									username = botlogin.username)
 			print("Logged to reddit as " + reddit.user.me().name) 						
 			output_log("Login to reddit as: " + reddit.user.me().name)
 			
