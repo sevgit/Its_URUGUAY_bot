@@ -1,11 +1,9 @@
 import praw #reddit
-#import pyowm #informaciono meteorologica
 import random
 import time
 import datetime
 import traceback #para logear los errores
 import unicodedata
-#import login #informacion personal para log in del bot
 
 def update_log(id, log_path): #para los comentarios que ya respondi
 	with open(log_path, 'a') as my_log:
@@ -66,7 +64,7 @@ if __name__ == "__main__":
 					reply = get_reply()
 					
 					s = "\n\n*****"
-					s = s + "\n\n Script by /u/Sevg, hosting by /u/DirkGentle *^and ^yes, ^weed ^is ^legal ^here*"
+					s = s + "\n\n Script by \/u/Sevg, hosting by \/u/DirkGentle *^and ^yes, ^weed ^is ^legal ^here*"
 					s = s + "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
 					s = s + "\n\n Visit us at /r/Uruguay"
 					
