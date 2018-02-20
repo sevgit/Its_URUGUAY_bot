@@ -26,8 +26,15 @@ def output_log(text): #lo uso para ver el output del bot
 
 def check_condition(c): #llamaron al bot?
 	text = c.body
-	if ("urugay" in text.lower() or "uraguay" in text.lower() or "urogway" in text.lower() or "uruguauy" in text.lower() or "uruguary" in text.lower() or "uruguary" in text.lower() ) :
-		return True
+	uruguay_misspells = ["urugay", 
+			     "uraguay",
+			     "urogway",
+			     "uruguauy",
+			     "uruguary",
+			     "uruguary"]
+	for version in uruguay_misspells:
+		if version in text.lower():
+			return True
 
 def get_reply():
 	replies = [	"Did you mean *Uruguay**?",
@@ -61,6 +68,7 @@ if __name__ == "__main__":
 					s = "\n\n*****"
 					s = s + "\n\n Script by /u/Sevg, hosting by /u/DirkGentle *^and ^yes, ^weed ^is ^legal ^here*"
 					s = s + "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
+					s = s + "\n\n Visit us at /r/Uruguay"
 					
 					comment.reply(reply + s)
 					output_log("{" +  reply + "}")
