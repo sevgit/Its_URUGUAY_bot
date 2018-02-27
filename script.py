@@ -5,6 +5,7 @@ import datetime
 import traceback #para logear los errores
 import botlogin #informacion personal para log in del bot
 import unicodedata
+import string
 
 def update_log(id, log_path): #para los comentarios que ya respondi
 	with open(log_path, 'a') as my_log:
@@ -23,6 +24,17 @@ def output_log(text): #lo uso para ver el output del bot
 		s = s + text +  "\n"
 		myLog.write(s)
 
+def find_substring(needle, haystack):
+    index = haystack.find(needle)
+    if index == -1:
+        return False
+    if index != 0 and haystack[index-1] not in string.whitespace:
+        return False
+    L = index + len(needle)
+    if L < len(haystack) and haystack[L] not in string.whitespace:
+        return False
+    return True
+		
 def check_condition(c): #llamaron al bot?
 	text = c.body
 	uruguay_misspells = ["urugay", 
@@ -32,7 +44,7 @@ def check_condition(c): #llamaron al bot?
 			     "uruguary",
 			     "uruguary"]
 	for version in uruguay_misspells:
-		if version in text.lower():
+		if find_substring(version, text.lower()):
 			return True
 
 def get_reply():
