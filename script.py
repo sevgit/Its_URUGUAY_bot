@@ -61,7 +61,8 @@ if __name__ == "__main__":
 			
 			output_log("Comenzando el script")
 			log = load_log(comment_log_path)
-			reddit = praw.Reddit(	client_secret = botlogin.client_secret,
+			reddit = praw.Reddit(	client_id = botlogin.client_id,
+									client_secret = botlogin.client_secret,
 									password = botlogin.password,
 									user_agent = "Its_URUGUAY_bot script by Sevg/Dirkgentle/ElectrWeakHyprCharge",
 									username = botlogin.username)
