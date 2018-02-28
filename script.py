@@ -41,7 +41,6 @@ def check_condition(c): #llamaron al bot?
 			     "uraguay",
 			     "urogway",
 			     "uruguauy",
-			     "uruguary",
 			     "uruguary"]
 	for version in uruguay_misspells:
 		if find_substring(version, text.lower()):
@@ -78,7 +77,7 @@ if __name__ == "__main__":
 					s = "\n\n*****"
 					s = s + "\n\n Script by \/u/Sevg, hosting by \/u/DirkGentle *^and ^yes, ^weed ^is ^legal ^here*"
 					s = s + "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
-					s = s + "\n\n Visit us at /r/Uruguay"
+					
 					
 					comment.reply(reply + s)
 					output_log("{" +  reply + "}")
