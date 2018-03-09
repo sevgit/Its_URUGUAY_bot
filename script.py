@@ -41,7 +41,8 @@ def check_condition(c): #llamaron al bot?
 			     "uraguay",
 			     "urogway",
 			     "uruguauy",
-			     "uruguary"]
+			     "uruguary",
+			     "uruguay"] #aca agrego uruguay bien escrito para que también encuentren el subreddit la gente que sabe escribir uruguay.
 	for version in uruguay_misspells:
 		if find_substring(version, text.lower()):
 			return True
@@ -76,6 +77,7 @@ if __name__ == "__main__":
 					reply = get_reply()
 					
 					s = "\n\n*****"
+					s = s + "\n\n Visit *r/ROU* , the Uruguayan subreddit!  --  Visita *r/ROU*, el subreddit Uruguayo!"
 					s = s + "\n\n Script by \/u/Sevg, hosting by \/u/DirkGentle *^and ^yes, ^weed ^is ^legal ^here*"
 					s = s + "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
 					
