@@ -46,6 +46,11 @@ def check_condition(c): #llamaron al bot?
 	for version in uruguay_misspells:
 		if find_substring(version, text.lower()):
 			return True
+		
+def check_condition2(c): #llamaron al bot escribiendo bien?
+	text = c.body
+	if find_substring("uruguay", text.lower()):
+		return true
 
 def get_reply():
 	replies = [	"Did you mean *Uruguay**?",
@@ -86,6 +91,12 @@ if __name__ == "__main__":
 					output_log("{" +  reply + "}")
 					log.append(comment.id)
 					update_log(comment.id, comment_log_path) 
+				else if check_condition2(comment) and comment.id not in log:
+					#output_log("{" + unicodedata.normalize('NFKD', comment.body).encode('ascii', 'ignore') + "}")
+					s = "^Visit ^*r/ROU* , ^the ^Uruguayan ^subreddit!  ^--  ^Visita ^*r/ROU*, ^el ^subreddit ^Uruguayo!"
+					s = s + "\n\n Script by \/u/Sevg, hosting by \/u/DirkGentle *^and ^yes, ^weed ^is ^legal ^here*"
+					s = s + "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
+					comment.reply(s)
 		except Exception as exception:
 			
 			output_log(str(exception))
