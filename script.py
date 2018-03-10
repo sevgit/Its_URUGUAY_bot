@@ -28,10 +28,10 @@ def find_substring(needle, haystack):
     index = haystack.find(needle)
     if index == -1:
         return False
-    if index != 0 and haystack[index-1] not in string.whitespace:
+    if index != 0 and haystack[index-1] in string.letters:
         return False
     L = index + len(needle)
-    if L < len(haystack) and haystack[L] not in string.whitespace:
+    if L < len(haystack) and haystack[L] in string.letters:
         return False
     return True
 		
