@@ -34,16 +34,29 @@ def find_substring(needle, haystack):
     if L < len(haystack) and haystack[L] in string.letters:
         return False
     return True
-        
-def check_condition(c): #llamaron al bot?
-    text = c.body
-    uruguay_misspells = ["urugay", 
-                 "uraguay",
-                 "urogway",
-                 "uruguauy",
-                 "uruguary"]
-    for version in uruguay_misspells:
+
+uruguay_misspells = [
+    "urugay",
+    "uraguay",
+    "uragay",
+    "urogway",
+    "uruguauy",
+    "uruguary",
+    ]
+
+def is_quote(text):
+    if len(text) > 1:
+        return text[0] == '>'
+
+def check_misspells(text, misspells):
+    for version in misspells:
         if find_substring(version, text.lower()):
+            return True
+
+def check_condition(c): #llamaron al bot?
+    for p in c.body.split('\n'):
+        # separo en parrafos para no responder a texto citado.
+        if not is_quote(p) and check_misspells(p, uruguay_misspells):
             return True
 
 def get_reply():
