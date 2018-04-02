@@ -2,3 +2,4 @@ botlogin.py
 *.pyc
 log.txt
 output_log.txt
+launcher.sh
