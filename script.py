@@ -11,26 +11,29 @@ import botlogin
 comment_log_path = "log.txt"
 output_log_path = "output_log.txt"
 
-uruguay_misspells = [
-    "urugay",
-    "uraguay",
-    "uragay",
-    "urogway",
-    "uruguauy",
-    "uruguary",
-]
+misspells = {
+    "Uruguay": [
+        "urugay",
+        "uraguay",
+        "uragay",
+        "urogway",
+        "uruguauy",
+        "uruguary",
+    ],
+    "Uruguayan": [
+        "urugayan",
+        "uraguayan",
+        "uragayan",
+        "urogwayan",
+        "uruguauyan",
+        "uruguaryan",
+    ]
+}
 
 replies = [
-    "Did you mean *Uruguay**?",
-    "I'm pretty sure you meant *Uruguay**",
+    "Did you mean **{}**?",
+    "I'm pretty sure you meant **{}**",
 ]
-
-signature = (
-    "\n\n Script by \/u/Sevg, hosting by \/u/DirkGentle"
-    "*^and ^yes, ^weed ^is ^legal ^here*"
-)
-source = "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
-epilogue = "\n\n*****\n\n{}\n\n{}".format(signature, source)
 
 
 def update_log(id, log_path):
@@ -79,16 +82,29 @@ def check_misspells(text, misspells):
             return True
 
 
-def check_condition(c):
-    """ Has the bot been called?"""
-    for p in c.body.split('\n'):
-        # Separate by paragraphs to avoid triggering by quoted text.
-        if not is_quote(p) and check_misspells(p, uruguay_misspells):
-            return True
-
-
 def get_reply():
     return random.choice(replies)
+
+
+def check_condition(comment):
+    """ Has the bot been called?"""
+    paragraphs = [
+        paragraph for paragraph in comment.body.split('\n')
+        if not is_quote(paragraph)
+    ]
+    for paragraph in paragraphs:
+        # Separate by paragraphs to avoid triggering by quoted text.
+        for word in misspells:
+            if check_misspells(paragraph, misspells[word]):
+                return get_reply().format(word)
+
+
+signature = (
+    "\n\n Script by \/u/Sevg, hosting by \/u/DirkGentle"
+    "*^and ^yes, ^weed ^is ^legal ^here*"
+)
+source = "\n\n [Source.](https://github.com/sevgit/Its_URUGUAY_bot)"
+epilogue = "\n\n*****\n\n{}\n\n{}".format(signature, source)
 
 
 print("RUNNING")
@@ -111,8 +127,8 @@ if __name__ == "__main__":
             output_log("Logged to reddit as: {}".format(reddit.user.me().name))
 
             for comment in reddit.subreddit('all').stream.comments():
-                if check_condition(comment) and comment.id not in log:
-                    reply = get_reply()
+                reply = check_condition(comment)
+                if reply and comment.id not in log:
                     comment.reply("{} {}".format(reply, epilogue))
 
                     output_log("{{{}}}".format(reply))
