@@ -9,7 +9,6 @@ import botlogin
 
 
 comment_log_path = "log.txt"
-output_log_path = "output_log.txt"
 
 misspells = {
     "Uruguay": [
@@ -52,6 +51,9 @@ def load_log(log_path):
 
 def output_log(text):
     """ Used for debugging."""
+    output_log_path = './logs/{}_output_log.txt'.format(
+        datetime.date.today().strftime('%Y_%m')
+    )
     with open(output_log_path, 'a') as myLog:
         s = "[{}]: {}\n".format(
             datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text
